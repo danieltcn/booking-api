@@ -1,0 +1,24 @@
+version: '3'
+
+networks:
+  booking:
+    name: booking
+
+services:
+  booking-api:
+    container_name: booking
+    image: booking/api
+    build:
+      context: .
+      dockerfile: docker/development.dockerfile
+    volumes:
+      - .:/usr/src
+      - /usr/src/node_modules
+    ports:
+      - 3000:3000
+      - 8800:8800
+    environment:
+      NODE_ENV: local
+      APP_DEBUG: 'false'
+    networks:
+      - booking

@@ -10,7 +10,7 @@ export class CustomError extends Error {
   }
 
   getErrorMessage() {
-    return 'Something went wrong: ' + this.message;
+    return "Something went wrong: " + this.message;
   }
 }
 

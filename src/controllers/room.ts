@@ -2,7 +2,11 @@ import Room from "../models/Room";
 import Hotel from "../models/Hotel";
 import { NextFunction, Request, Response } from "express";
 
-export const createRoom = async (req: Request, res: Response, next: NextFunction) => {
+export const createRoom = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const hotelId = req.params.hotelid;
   const newRoom = new Room(req.body);
 
@@ -25,7 +29,11 @@ export const createRoom = async (req: Request, res: Response, next: NextFunction
   }
 };
 
-export const updateRoom = async (req: Request, res: Response, next: NextFunction) => {
+export const updateRoom = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const updatedRoom = await Room.findByIdAndUpdate(
       req.params.id,
@@ -37,13 +45,17 @@ export const updateRoom = async (req: Request, res: Response, next: NextFunction
     next(err);
   }
 };
-export const updateRoomAvailability = async (req: Request, res: Response, next: NextFunction) => {
+export const updateRoomAvailability = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     await Room.updateOne(
       { "roomNumbers._id": req.params.id },
       {
         $push: {
-          "roomNumbers.$.unavailableDates": req.body.dates
+          "roomNumbers.$.unavailableDates": req.body.dates,
         },
       }
     );
@@ -52,7 +64,11 @@ export const updateRoomAvailability = async (req: Request, res: Response, next: 
     next(err);
   }
 };
-export const deleteRoom = async (req: Request, res: Response, next: NextFunction) => {
+export const deleteRoom = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const hotelId = req.params.hotelid;
   try {
     await Room.findByIdAndDelete(req.params.id);
@@ -68,7 +84,11 @@ export const deleteRoom = async (req: Request, res: Response, next: NextFunction
     next(err);
   }
 };
-export const getRoom = async (req: Request, res: Response, next: NextFunction) => {
+export const getRoom = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const room = await Room.findById(req.params.id);
     res.status(200).json(room);
@@ -76,7 +96,11 @@ export const getRoom = async (req: Request, res: Response, next: NextFunction) =
     next(err);
   }
 };
-export const getRooms = async (req: Request, res: Response, next: NextFunction) => {
+export const getRooms = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const rooms = await Room.find();
     res.status(200).json(rooms);

@@ -122,11 +122,11 @@ export const getHotelRooms = async (
     const hotel = await Hotel.findById(req.params.id);
     let hotel2: any = {};
     if (hotel !== null) hotel2 = hotel;
-      const list = await Promise.all(
-        hotel2.rooms.map((room: any) => {
-          return Room.findById(room);
-        })
-      );
+    const list = await Promise.all(
+      hotel2.rooms.map((room: any) => {
+        return Room.findById(room);
+      })
+    );
     res.status(200).json(list);
   } catch (err) {
     next(err);
